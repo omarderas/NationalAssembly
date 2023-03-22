@@ -9,10 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+    title: `Belize National Assembly`,
+    description: `The National Assembly of Belize is the Legislature or Parliament of Belize. It consists of two Houses: the Senate (Upper House) and the House of Representatives (Lower House).`,
     author: `Jose Urbina`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    siteUrl: `https://www.nationalassembly.gov.bz/`,
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -37,7 +37,7 @@ module.exports = {
         // https://css-tricks.com/meta-theme-color-and-trickery/
         // theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/favicon-bna.png`, // This path is relative to the root of the site.
       },
     },
   ],
