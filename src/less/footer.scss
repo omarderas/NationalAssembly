@@ -1,0 +1,120 @@
+.footer{
+    background-color: rgb(11, 38, 24);
+    padding-top: 60px;
+   
+  
+    .footer-wrapper{
+        margin: 0 auto;
+        max-width: 1320px;
+        padding-bottom: 40px;
+        .row{
+            margin-right: 0px;
+            margin-left: 0px;
+            .col-sm-4{
+                @media(max-width: 575px){
+                    text-align: center;
+                }
+                .footer-brand{
+                    .gatsby-image-wrapper-constrained {
+                        display: inline-block;
+                        vertical-align: top;
+                        width: 300px;
+                    }
+                }
+                .footer-content{
+                    p{
+                        font-family: Poppins;
+                        display: block;
+                        padding-top: 0px;
+                        margin-bottom: -1px;
+                        letter-spacing: 0.02em;
+                        font-size: 14px;
+                        text-align: left;
+                        font-weight: 500;
+                        opacity: 0.8;
+                        color: #fff;
+                    }
+                    ul.social{
+                        padding-left: 0px;
+                        padding-top: 20px;
+                        li{
+                            display: inline-flex;
+                            list-style: none;
+                            a{
+                                margin-right: 17px;
+                                -webkit-transition: all 0.3s ease-in-out;
+                                -moz-transition: all 0.3s ease-in-out;
+                                transition: all 0.3s ease-in-out; 
+                                
+                                    svg{
+                                        -webkit-transition: all 0.3s ease-in-out;
+                                        -moz-transition: all 0.3s ease-in-out;
+                                        transition: all 0.3s ease-in-out; 
+                                        font-size: 31px;
+                                        border: 0.75px solid rgba(252, 217, 61, 0.282);
+                                        padding: 5px;
+                                        fill: #fff!important;
+                                    }
+
+                               
+                              
+                                
+                            }
+                            a:hover svg{
+                                transform: scale(1.2);
+                            }
+                        }
+                        
+                    }
+                    h1{
+                        color: #fff;
+                        z-index: 9999;
+                        font-family: "Cinzel", serif;
+                        color: #fff;
+                        margin-bottom: -14px;
+                        font-size: 30px;
+                        padding-top: 5px;
+                        padding-bottom: 20px;
+                    }
+                    a{
+                        font-size: 14px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        line-height: 2.3em;
+                        letter-spacing: 0.8px;
+                        color: #fff;
+                        
+                    }
+                }
+            }
+            .col-sm-4.second{
+                .footer-content{
+                    h1{
+                        padding-bottom: 40px;
+                    }
+                    p{
+                        margin-top: 5px;
+                    }
+                }
+            }
+            .footer-content{
+                @media(max-width: 575px){
+                    padding-bottom: 20px;
+                }
+            }
+        }
+    }
+    .footer-copyright{
+        text-align: center;
+        color: #fff;
+       background-color: #101c18;
+        padding: 15px;
+        margin-bottom: -2px;
+        margin-top: 20px;
+        p{
+            margin-bottom: 0px;
+            font-size: 12px;
+        }
+
+    }
+}
