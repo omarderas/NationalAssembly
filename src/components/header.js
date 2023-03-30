@@ -14,6 +14,20 @@ const MainLogo = "../images/assembly-logo-main.png";
 
 const Header = ({ siteTitle }) => (
   <header>
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+          <iframe width="100%" height="500px" src="https://www.youtube.com/embed/Sp6OcXvosQg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        
+        </div>
+
+      </div>
+  </div>
   <div className="row">
     <div className="col-sm-4">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,10 +43,10 @@ const Header = ({ siteTitle }) => (
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="" >
-          Latest News
+        <a class="nav-link" href="#myModal" data-toggle="modal" data-target="#myModal" >
+          Latest House Meeting
           <span className="desc">
-            Current Updates
+            View Video
           </span>
           </a>
         </li>

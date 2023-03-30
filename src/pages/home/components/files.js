@@ -17,22 +17,22 @@ function Files() {
                             <h1>Acts of Parliament</h1>
                             <ul className="docs">
                                <a href="">
-                                    <li>Acts of Parliament 2023</li>
+                                    <li>Acts of Parliament - October</li>
                                  
                                 </a> 
                                 <a href="">
                                 
-                                    <li>Acts of Parliament 2022</li>
+                                    <li>Acts of Parliament - April</li>
                                   
                                 </a> 
                                 <a href="">
                                   
-                                    <li>Acts of Parliament 2021</li>
+                                    <li>Acts of Parliament - May</li>
                                    
                                 </a> 
                                 <a href="">
                                   
-                                    <li>Acts of Parliament 2020</li>
+                                    <li>Acts of Parliament - July</li>
                                 </a> 
                             </ul>
                         </div>
@@ -48,26 +48,23 @@ function Files() {
                         <StaticImage src={actsHeader} quality={60} formats={["auto", "webp", "avif"]} />
                         </div>
                         <div className="header-title">
-                            <h1>Orders of the Day</h1>
+                            <h1>House of Representatives</h1>
                             <ul className="docs">
                                <a href="">
-                                    <li>Orders of the Day 2023</li>
+                                    <li>Orders of the Day - February</li>
                                  
                                 </a> 
                                 <a href="">
                                 
-                                    <li>Orders of the Day 2022</li>
+                                    <li>Orders of the Day - March</li>
                                   
                                 </a> 
                                 <a href="">
                                   
-                                    <li>Orders of the Day 2021</li>
+                                    <li>Orders of the Day - January</li>
                                    
                                 </a> 
-                                <a href="">
-                                  
-                                    <li>Orders of the Day 2020</li>
-                                </a> 
+                              
                             </ul>
                         </div>
                         <div className="view-more">
@@ -82,10 +79,16 @@ function Files() {
                         <StaticImage src={actsHeader} quality={60} formats={["auto", "webp", "avif"]} />
                         </div>
                         <div className="header-title">
-                            <h1>Draft Bills</h1>
+                            <h1>Senate</h1>
                             <ul className="docs">
-                               <a href="">
-                                    <li>Draft Bills 2023</li>
+                                <a href="">
+                                    
+                                    <li>Orders of the Day - January</li>
+                                    
+                                </a> 
+                                <a href="">
+                                    
+                                    <li>Orders of the Day - March</li>
                                 </a> 
                             </ul>
                         </div>
@@ -101,10 +104,10 @@ function Files() {
                         <StaticImage src={actsHeader} quality={60} formats={["auto", "webp", "avif"]} />
                         </div>
                         <div className="header-title">
-                            <h1>Assembly Docs</h1>
+                            <h1>Draft Bills</h1>
                             <ul className="docs">
                                <a href="">
-                                    <li>Docs 2023</li>
+                                    <li>Docs - January</li>
                                 </a> 
                             </ul>
                         </div>

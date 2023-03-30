@@ -10,10 +10,13 @@ import Files from "./home/components/files"
 import Celebrate from "./home/components/celebration"
 import QuickAccess from "./home/components/access"
 import Updates from "./home/components/news"
+import Meeting from "./meetings/components/meeting"
 
 const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
+    <Meeting/>
+
     <Hero/>
     <Files/>
     <Celebrate/>

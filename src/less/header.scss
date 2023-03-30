@@ -202,5 +202,34 @@ header{
             }
         }
     }
+
+
 }
 
+#myModal.fade { 
+        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))!important;
+        
+    .modal-content {
+        background-color: unset!important;
+        border: unset!important;
+    }
+    .modal-header {
+    padding: 0px;
+    border-bottom: unset!important;
+    }
+    @media (min-width: 576px){
+        .modal-dialog {
+            max-width: 825px;
+            margin-top: 7%;
+        }
+    }
+    .close{
+        font-size: 35px;
+        font-weight: 700;
+        color: #fff;
+        opacity: 1;
+    }
+    button:focus {
+        outline: unset!important;
+    }
+}

@@ -1,0 +1,76 @@
+.sidetabs{
+
+    position: fixed;
+    top: 30%;
+    transition: .5s all;
+    z-index: 999999;
+    left: -299px;
+    &:hover{
+        left: 0;
+    }
+    .main-content-tabs{
+        .tab-title{
+            display: block;
+           
+            
+
+            h1{
+                position: absolute;
+                top: 76px;
+                left: 223px;
+                transform: rotate(-90deg);
+                font-family: Poppins;
+       
+                font-style: normal;
+                letter-spacing: 0.5px;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: #fff;
+                background-color: #0b2618;
+              
+                text-decoration: none;
+                padding-bottom: 0px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+                border: 1px solid;
+                width: 203px;
+                text-align: center;
+                cursor: pointer;
+            }
+        }
+        .row{
+            margin: 0px;
+            background-color: #e0d9d0;
+            .tabs-content{
+                padding: 15px;
+                .meeting{
+                    border: 1px solid #fff;
+                    padding: 10px;
+                    h1{
+                        font-family: Poppins;
+                        font-weight: 600;
+                        font-style: normal;
+                        color: #0b2618;
+                        font-size: 16px;
+                        text-decoration: none;
+                        padding-bottom: 0px;
+                    }
+                    span{
+                        p{
+                            font-family: Poppins;
+                            display: block;
+                            padding-top: 0px;
+                            margin-bottom: -1px;
+                            letter-spacing: 0.02em;
+                            font-size: 14px;
+                            text-align: left;
+                            font-weight: 500;
+                            opacity: 0.8;
+                            color: #0b2618;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
