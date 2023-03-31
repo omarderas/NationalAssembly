@@ -5,7 +5,7 @@
     background-position: center;
     background-size: cover;
     .hero-content {
-        margin-right: 71%;
+        
         padding: 29px;
         top: 63%;
         height: 275px;
@@ -13,6 +13,12 @@
         background-image: linear-gradient(rgba(0,25,44,.6),rgba(0,25,44,.6));
         border-right: 1px solid #fcd93d;
         border-top: 1px solid #fcd93d;
+        @media(min-width: 1607px){
+            margin-right: 71%;
+        }
+        @media(max-width: 1606px){
+            margin-right: 67%;
+        }
        
         .hero-main{
             max-width: 475px;
