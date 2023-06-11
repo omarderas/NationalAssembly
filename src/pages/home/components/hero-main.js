@@ -1,9 +1,25 @@
 import * as React from "react"
-
+import { StaticQuery, graphql, Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 function Hero() {
 	return (
+
+        <StaticQuery
+        query={graphql`
+        query Hero {
+            allStrapiMessage { 
+              edges {
+                node {
+                  id
+                  Title
+                }
+              }
+            }
+        }
+        `}
+                
+        render={data => (
         <div className="main-content">
             <div className="hero-content">
                <div className="hero-main">
@@ -16,7 +32,9 @@ function Hero() {
             <div className="hero-content-main">
                 <div className="row">
                     <div className="col-sm-12">
-                        <h1>Stay Up to Date</h1>
+                    {data.allStrapiMessage.edges.map(({ node: titleText }) => (
+                        <h1>{titleText.Title}</h1>
+                    ))}
                         <iframe src="https://www.youtube.com/embed/hgX2ix34Eb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                  
@@ -52,6 +70,9 @@ function Hero() {
                 </div>
             </div>
         </div>
+
+           )}
+        />
 
     );
 }

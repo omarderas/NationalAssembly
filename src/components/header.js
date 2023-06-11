@@ -31,7 +31,7 @@ const Header = ({ siteTitle }) => (
   <div className="row">
     <div className="col-sm-4">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-     <a class="navbar-brand" href="#">  <StaticImage src={MainLogo} quality={60} formats={["auto", "webp", "avif"]} /></a>
+     <a class="navbar-brand" href="#">  <StaticImage src="../images/assembly-logo-main.png" quality={60} formats={["auto", "webp", "avif"]} /></a>
     </nav>
     </div>
     <div className="col-sm-6">

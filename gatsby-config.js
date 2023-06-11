@@ -1,12 +1,6 @@
-/**
- * Configure your Gatsby site with this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
- */
-
-/**
- * @type {import('gatsby').GatsbyConfig}
- */
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
     title: `Belize National Assembly`,
@@ -40,5 +34,15 @@ module.exports = {
         icon: `src/images/favicon-bna.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-source-strapi`,
+      options: {
+        apiURL: `http://127.0.0.1:1338/`,
+        queryLimit: 1000,
+        collectionTypes: ['act'],
+        singleTypes: ['message'],
+      },
+    },
   ],
+
 }

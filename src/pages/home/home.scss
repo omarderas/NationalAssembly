@@ -447,3 +447,14 @@
        
     }
 }
+
+.Progress, .Progress__Seek{
+    height: 3px;
+}
+.Progress{
+    background-color: #eee;
+    margin: 24px;
+}
+.Progress__Seek{
+    background-color: green;
+}
