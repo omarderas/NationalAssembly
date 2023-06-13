@@ -11,9 +11,9 @@ import Celebrate from "./home/components/celebration"
 import QuickAccess from "./home/components/access"
 import Updates from "./home/components/news"
 import Meeting from "./meetings/components/meeting"
-import FileUploadForm from "./home/components/file-uploader"
 
-import MyUploadForm from "./home/components/cloudinary-uploader"
+
+
 
 const IndexPage = () => (
   <Layout>
@@ -21,7 +21,7 @@ const IndexPage = () => (
     <Meeting/>
 
     <Hero/>
-    <MyUploadForm/>
+  
     <Files/>
     <Celebrate/>
     <QuickAccess/>

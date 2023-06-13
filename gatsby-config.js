@@ -2,6 +2,7 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+const apiToken = process.env.STRAPI_API_TOKEN;
 module.exports = {
   siteMetadata: {
     title: `Belize National Assembly`,
@@ -38,11 +39,11 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `http://127.0.0.1:1338/`,
+        apiURL: `https://dazzling-love-27c27bfaa6.strapiapp.com`,
         queryLimit: 1000,
         collectionTypes: ['act'],
-        singleTypes: ['message'],
-      },
+        singleTypes: ['message','document'],
+        },
     },
   ],
 
