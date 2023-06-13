@@ -153,7 +153,7 @@ function DocumentCenter() {
                       <div key={act.Doc.id} className="act">
                         {(act.Doc).map((data, id) => (
                           <a
-                            href={"http://localhost:1338" + data.url}
+                            href={data.url}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
@@ -193,7 +193,7 @@ function DocumentCenter() {
                                 className={
                                   currentPage === index + 1 ? "active" : ""
                                 }
-                                onClick={() => paginate(index + 1)}
+                                onClick={() => paginate(index + 1)}          
                               >
                                 {index + 1}
                               </li>
