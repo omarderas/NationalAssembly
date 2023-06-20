@@ -32,9 +32,7 @@ function Hero() {
             <div className="hero-content-main">
                 <div className="row">
                     <div className="col-sm-12">
-                    {data.allStrapiMessage.edges.map(({ node: titleText }) => (
-                        <h1>{titleText.Title}</h1>
-                    ))}
+                    
                         <iframe src="https://www.youtube.com/embed/hgX2ix34Eb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                  
