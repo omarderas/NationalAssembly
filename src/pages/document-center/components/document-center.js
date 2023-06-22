@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { StaticQuery, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
+import SideTab from "./SideTab"
 
 const MainLogo = "../../../images/assembly-logo-main.png";
 const PdfIcon = "../../../images/pdf-icon.png";
@@ -10,8 +11,22 @@ function DocumentCenter() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState("");
   const [filterYear, setFilterYear] = useState("");
+  const [filterMonth, setFilterMonth] = useState("");
+  const [filterStatus, setFilterStatus] = useState("");
   const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const [selectedItem, setSelectedItem] = useState(null); // Selected item for side tab
   const itemsPerPage = 18; // Number of items to display per page
+
+
+    // Handle item click to open side tab
+    const handleItemClick = (item) => {
+      setSelectedItem(item);
+    };
+  
+    // Handle close side tab
+    const handleCloseSideTab = () => {
+      setSelectedItem(null);
+    }; 
 
   return (
     <StaticQuery
@@ -21,13 +36,28 @@ function DocumentCenter() {
             distinct(field: { Type: SELECT })
             edges {
               node {
-                Doc {
+                PDF {
                   id
                   url
                   name
                 }
+                Description {
+                  data {
+                    Description
+                    id
+                  }
+                }
+                Keywords {
+                  data {
+                    id
+                    Keywords
+                  }
+                }
                 Type
                 Year
+                Month
+                Title
+                Status
               }
             }
           }
@@ -65,16 +95,59 @@ function DocumentCenter() {
             </label>
           ));
 
-        // Filter the acts based on type, year, and search query
+        const monthOptions = allActs
+          .map((act) => act.Month)
+          .filter(
+            (month, index, self) => month && self.indexOf(month) === index
+          )
+          .map((month) => (
+            <label key={month}>
+              <input
+                type="checkbox"
+                value={month}
+                checked={filterMonth === month}
+                onChange={(e) =>
+                  setFilterMonth(e.target.checked ? month : "")
+                }
+              />
+              {month}
+            </label>
+          ));
+
+          const statusOptions = allActs
+            .map((act) => act.Status)
+            .filter(
+              (status, index, self) => status && self.indexOf(status) === index
+            )
+            .map((status) => (
+              <label key={status}>
+                <input
+                  type="checkbox"
+                  value={status}
+                  checked={filterStatus === status}
+                  onChange={(e) => setFilterStatus(e.target.checked ? status : "")}
+                />
+                {status}
+              </label>
+            ));
+
+        // Filter the acts based on type, year, month, and search query
         let filteredActs = allActs.filter((act) => {
           const typeName = act.Type || ""; // Handle undefined or null
           const yearString = act.Year ? act.Year.toString() : ""; // Handle undefined or null
+          const monthString = act.Month || ""; // Handle undefined or null
 
           // Filter based on search query
           if (
             searchQuery &&
-            !typeName.toLowerCase().includes(searchQuery.toLowerCase()) &&
-            !yearString.includes(searchQuery)
+            !act.Title.toLowerCase().includes(searchQuery.toLowerCase()) &&
+            !act.Description.data.Description
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) &&
+            !act.PDF[0].name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+            !act.Keywords.data.Keywords
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
           ) {
             return false;
           }
@@ -89,6 +162,16 @@ function DocumentCenter() {
             return false;
           }
 
+          // Filter based on month
+          if (filterMonth && monthString !== filterMonth) {
+            return false;
+          }
+
+          // Filter based on status
+            if (filterStatus && act.Status !== filterStatus) {
+              return false;
+            }
+
           return true;
         });
 
@@ -101,6 +184,7 @@ function DocumentCenter() {
         );
 
         const paginate = (pageNumber) => setCurrentPage(pageNumber);
+        const isItemSelected = selectedItem !== null;
 
         return (
           <div className="container doc-center-main">
@@ -111,13 +195,25 @@ function DocumentCenter() {
                     <StaticImage src={MainLogo} />
                   </div>
                   <div className="filters">
+                     <span id="filters-header">
+                      <p>Refine Search</p>
+                     </span>
+
                     <details open>
                       <summary>Doc Type</summary>
                       {typeOptions}
                     </details>
-                    <details open>
+                    <details>
                       <summary>Doc Year</summary>
                       {yearOptions}
+                    </details>
+                    <details>
+                      <summary>Doc Month</summary>
+                      {monthOptions}
+                    </details>
+                    <details>
+                      <summary>Doc Visibility</summary>
+                      {statusOptions}
                     </details>
                   </div>
                 </div>
@@ -130,7 +226,7 @@ function DocumentCenter() {
                   <div className="search-bar">
                     <input
                       type="text"
-                      placeholder="Search..."
+                      placeholder="Search Document..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -139,36 +235,44 @@ function DocumentCenter() {
                 <div className="featured-content">
                   <div className="acts">
                     <div className="acts-header">
+                  
                       <span id="doc-type-title">
-                        <p>Document Type</p>
+                        <p>Document Title</p>
                       </span>
                       <span id="doc-name-title">
-                        <p>Document Name</p>
+                        <p>Document Date</p>
                       </span>
                       <span id="doc-year-title">
-                        <p>Document Year</p>
+                        <p>Document Type</p>
+                      </span>
+                      <span id="doc-status-title">
+                        <p>Visibility</p>
                       </span>
                     </div>
                     {currentItems.map((act) => (
-                      <div key={act.Doc.id} className="act">
-                        {(act.Doc).map((data, id) => (
+                      <div key={act.PDF.id} className="act">
+                        {act.PDF.map((data, id) => (
                           <a
-                            href={data.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
+                            key={act.PDF.id}
+                            className="act"
+                            onClick={() => handleItemClick(act)}
+                         >
                             <span id="doc-name">
                               <StaticImage src={PdfIcon} />
-                              <p>{act.Type}</p>
+                              <p>{act.Title}</p>
+                            </span>
+                            
+                            <span id="doc-year">
+                              <p>{act.Month} {act.Year}</p>
                             </span>
                             <span id="doc-type">
-                              <p>{data.name}</p>
+                              <p>{act.Type}</p>
                             </span>
-                            <span id="doc-year">
-                              <p>{act.Year}</p>
+                            <span id="doc-status">
+                              <p>{act.Status}</p>
                             </span>
                             <span id="doc-view">
-                              <p>View/Download</p>
+                              <p>View More</p>
                             </span>
                           </a>
                         ))}
@@ -179,7 +283,6 @@ function DocumentCenter() {
                   <div className="pagination">
                     {filteredActs.length > itemsPerPage && (
                       <div className="pagination-items">
-                       
                         <ul>
                           {Array.from(
                             {
@@ -193,7 +296,7 @@ function DocumentCenter() {
                                 className={
                                   currentPage === index + 1 ? "active" : ""
                                 }
-                                onClick={() => paginate(index + 1)}          
+                                onClick={() => paginate(index + 1)}
                               >
                                 {index + 1}
                               </li>
@@ -208,6 +311,9 @@ function DocumentCenter() {
                       </div>
                     )}
                   </div>
+                    {isItemSelected && (
+                      <SideTab item={selectedItem} onClose={handleCloseSideTab} />
+                     )}
                 </div>
               </div>
             </div>
