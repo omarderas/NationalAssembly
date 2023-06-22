@@ -1,6 +1,10 @@
 import * as React from "react";
 
 function SideTab({ item, onClose }) {
+    if (!item || !item.Title) {
+        // Return null or a default component when the item prop is missing or doesn't have a Title property
+        return null;
+      }
   return (
     <div className="side-tab">
       <div className="side-tab-header">
