@@ -2,10 +2,13 @@ import * as React from "react";
 import { useState } from "react";
 import { StaticQuery, graphql } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
-import SideTab from "./SideTab"
+import { useEffect } from 'react';
+import SideTab from "./SideTab";
+import { useAuth } from "../../../components/auth";
 
 const MainLogo = "../../../images/assembly-logo-main.png";
 const PdfIcon = "../../../images/pdf-icon.png";
+const UserIcon = "../../../images/belize-main-logo.png";
 
 function DocumentCenter() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -16,17 +19,33 @@ function DocumentCenter() {
   const [currentPage, setCurrentPage] = useState(1); // Current page number
   const [selectedItem, setSelectedItem] = useState(null); // Selected item for side tab
   const itemsPerPage = 18; // Number of items to display per page
-
-
-    // Handle item click to open side tab
-    const handleItemClick = (item) => {
-      setSelectedItem(item);
-    };
+  const { isAuthenticated, logout } = useAuth();
   
-    // Handle close side tab
-    const handleCloseSideTab = () => {
-      setSelectedItem(null);
-    }; 
+  const [user, setUser] = useState(null);
+  // Handle item click to open side tab
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+  };
+
+  // Handle close side tab
+  const handleCloseSideTab = () => {
+    setSelectedItem(null);
+  };
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await isAuthenticated();
+      setUser(user);
+    };
+
+    fetchUser();
+  }, [isAuthenticated]);
+ 
+
+
+  if (!isAuthenticated()) {
+    return <div class="login-container"> <StaticImage src={UserIcon} /> <br/><p>Please login to access the document center. <br/><a href="/login">Login</a></p></div>;
+  }
 
   return (
     <StaticQuery
@@ -106,30 +125,30 @@ function DocumentCenter() {
                 type="checkbox"
                 value={month}
                 checked={filterMonth === month}
-                onChange={(e) =>
-                  setFilterMonth(e.target.checked ? month : "")
-                }
+                onChange={(e) => setFilterMonth(e.target.checked ? month : "")}
               />
               {month}
             </label>
           ));
 
-          const statusOptions = allActs
-            .map((act) => act.Status)
-            .filter(
-              (status, index, self) => status && self.indexOf(status) === index
-            )
-            .map((status) => (
-              <label key={status}>
-                <input
-                  type="checkbox"
-                  value={status}
-                  checked={filterStatus === status}
-                  onChange={(e) => setFilterStatus(e.target.checked ? status : "")}
-                />
-                {status}
-              </label>
-            ));
+        const statusOptions = allActs
+          .map((act) => act.Status)
+          .filter(
+            (status, index, self) => status && self.indexOf(status) === index
+          )
+          .map((status) => (
+            <label key={status}>
+              <input
+                type="checkbox"
+                value={status}
+                checked={filterStatus === status}
+                onChange={(e) =>
+                  setFilterStatus(e.target.checked ? status : "")
+                }
+              />
+              {status}
+            </label>
+          ));
 
         // Filter the acts based on type, year, month, and search query
         let filteredActs = allActs.filter((act) => {
@@ -168,9 +187,9 @@ function DocumentCenter() {
           }
 
           // Filter based on status
-            if (filterStatus && act.Status !== filterStatus) {
-              return false;
-            }
+          if (filterStatus && act.Status !== filterStatus) {
+            return false;
+          }
 
           return true;
         });
@@ -195,9 +214,9 @@ function DocumentCenter() {
                     <StaticImage src={MainLogo} />
                   </div>
                   <div className="filters">
-                     <span id="filters-header">
+                    <span id="filters-header">
                       <p>Refine Search</p>
-                     </span>
+                    </span>
 
                     <details open>
                       <summary>Doc Type</summary>
@@ -216,6 +235,15 @@ function DocumentCenter() {
                       {statusOptions}
                     </details>
                   </div>
+                  <div className="user-info">
+                   <div id="userLogo">
+                      <StaticImage src={UserIcon} /> 
+                      <p> {user?.username}</p>
+                     
+                      
+                    </div>
+                    <button onClick={logout}>Logout</button>
+                  </div>
                 </div>
               </div>
               <div className="col-sm-10">
@@ -223,6 +251,7 @@ function DocumentCenter() {
                   <div className="title">
                     <h1>Document Center</h1>
                   </div>
+                 
                   <div className="search-bar">
                     <input
                       type="text"
@@ -235,7 +264,6 @@ function DocumentCenter() {
                 <div className="featured-content">
                   <div className="acts">
                     <div className="acts-header">
-                  
                       <span id="doc-type-title">
                         <p>Document Title</p>
                       </span>
@@ -256,12 +284,12 @@ function DocumentCenter() {
                             key={act.PDF.id}
                             className="act"
                             onClick={() => handleItemClick(act)}
-                         >
+                          >
                             <span id="doc-name">
                               <StaticImage src={PdfIcon} />
                               <p>{act.Title}</p>
                             </span>
-                            
+
                             <span id="doc-year">
                               <p>{act.Month} {act.Year}</p>
                             </span>
@@ -311,9 +339,9 @@ function DocumentCenter() {
                       </div>
                     )}
                   </div>
-                    {isItemSelected && (
-                      <SideTab item={selectedItem} onClose={handleCloseSideTab} />
-                     )}
+                  {isItemSelected && (
+                    <SideTab item={selectedItem} onClose={handleCloseSideTab} />
+                  )}
                 </div>
               </div>
             </div>

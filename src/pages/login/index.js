@@ -1,11 +1,12 @@
 import React from 'react';
-import Login from './components/login';
+import LoginForm from './components/login';
+import "./login.scss"
 
 const LoginPage = () => {
   return (
-    <div>
-      <h1>Welcome to the Login Page!</h1>
-      <Login />
+    <div className='login-main'>
+    
+      <LoginForm />
     </div>
   );
 };
