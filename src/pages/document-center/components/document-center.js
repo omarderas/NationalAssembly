@@ -44,7 +44,7 @@ function DocumentCenter() {
 
 
   if (!isAuthenticated()) {
-    return <div class="login-container"> <StaticImage src={UserIcon} /> <br/><p>Please login to access the document center. <br/><a href="/login">Login</a></p></div>;
+    return <div class="login-container"> <StaticImage src={UserIcon} /> <br/><p>This is a Restricted Page - Please login to access. <br/><a href="/login">Login</a></p></div>;
   }
 
   return (

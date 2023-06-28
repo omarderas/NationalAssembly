@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-const API_URL = 'https://dazzling-love-27c27bfaa6.strapiapp.com/api'; // Replace with your Strapi backend URL
+const API_URL = 'https://dazzling-love-27c27bfaa6.strapiapp.com/api'; 
 
 export const useAuth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
@@ -30,7 +30,6 @@ export const useAuth = () => {
 
     if (jwt) {
       // Fetch the user data using the JWT
-      // Modify the endpoint based on your Strapi configuration
       const fetchUser = async () => {
         try {
           const response = await axios.get(`${API_URL}/users/me`, {
@@ -62,4 +61,4 @@ export const useAuth = () => {
   };
 
   return { login, isAuthenticated, logout };
-};
+}; 
