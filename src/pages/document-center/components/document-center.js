@@ -22,6 +22,7 @@ function DocumentCenter() {
   const { isAuthenticated, logout } = useAuth();
   
   const [user, setUser] = useState(null);
+  const [UserRole, setRole] = useState(null);
   // Handle item click to open side tab
   const handleItemClick = (item) => {
     setSelectedItem(item);
@@ -34,17 +35,22 @@ function DocumentCenter() {
   
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await isAuthenticated();
-      setUser(user);
+      const authData = await isAuthenticated();
+      
+      // Check if the authentication data is not null
+      if (authData !== null) {
+        const { user, UserRole } = authData; // Destructure user and role
+        setUser(user);
+        setRole(UserRole); // Set the role state
+      }
     };
-
+  
     fetchUser();
   }, [isAuthenticated]);
- 
 
 
   if (!isAuthenticated()) {
-    return <div class="login-container"> <StaticImage src={UserIcon} /> <br/><p>This is a Restricted Page - Please login to access. <br/><a href="/login">Login</a></p></div>;
+    return <div className="login"><div class="login-container"> <StaticImage src={UserIcon} /> <br/><p>This is a Restricted Page - Please login to access. <br/><a href="/login">Login</a></p></div></div>;
   }
 
   return (
@@ -238,7 +244,8 @@ function DocumentCenter() {
                   <div className="user-info">
                    <div id="userLogo">
                       <StaticImage src={UserIcon} /> 
-                      <p> {user?.username}</p>
+                      <p> {user?.username}<br />{UserRole}</p>
+              
                      
                       
                     </div>
@@ -278,34 +285,48 @@ function DocumentCenter() {
                       </span>
                     </div>
                     {currentItems.map((act) => (
-                      <div key={act.PDF.id} className="act">
-                        {act.PDF.map((data, id) => (
-                          <a
-                            key={act.PDF.id}
-                            className="act"
-                            onClick={() => handleItemClick(act)}
-                          >
-                            <span id="doc-name">
-                              <StaticImage src={PdfIcon} />
-                              <p>{act.Title}</p>
-                            </span>
+                        <div key={act.PDF.id} className="act">
+                          {act.PDF.map((data, id) => {
+                            // Check the user's role
+                            const isAdmin = UserRole === "Admin";
+                            const isRegular = UserRole === "Regular";
+                            
+                            // Filter the documents based on the user's role
+                            const showDocument = isAdmin || (isRegular && act.Status === "Public");
 
-                            <span id="doc-year">
-                              <p>{act.Month} {act.Year}</p>
-                            </span>
-                            <span id="doc-type">
-                              <p>{act.Type}</p>
-                            </span>
-                            <span id="doc-status">
-                              <p>{act.Status}</p>
-                            </span>
-                            <span id="doc-view">
-                              <p>View More</p>
-                            </span>
-                          </a>
-                        ))}
-                      </div>
-                    ))}
+                            if (showDocument) {
+                              return (
+                                <a
+                                  key={act.PDF.id}
+                                  className="act"
+                                  onClick={() => handleItemClick(act)}
+                                >
+                                  <span id="doc-name">
+                                    <StaticImage src={PdfIcon} />
+                                    <p>{act.Title}</p>
+                                  </span>
+
+                                  <span id="doc-year">
+                                    <p>{act.Month} {act.Year}</p>
+                                  </span>
+                                  <span id="doc-type">
+                                    <p>{act.Type}</p>
+                                  </span>
+                                  <span id="doc-status">
+                                    <p>{act.Status}</p>
+                                  </span>
+                                  <span id="doc-view">
+                                    <p>View More</p>
+                                  </span>
+                                </a>
+                              );
+                            } else {
+                              return null;
+                            }
+                          })}
+                        </div>
+                      ))}
+
                   </div>
                   {/* Pagination */}
                   <div className="pagination">

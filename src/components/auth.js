@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-const API_URL = 'https://dazzling-love-27c27bfaa6.strapiapp.com/api'; 
+const API_URL = 'https://dazzling-love-27c27bfaa6.strapiapp.com/api';
 
 export const useAuth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
@@ -36,20 +36,18 @@ export const useAuth = () => {
             headers: {
               Authorization: `Bearer ${jwt}`,
             },
-
           });
 
-          return response.data; // Return the user object
-          
+          const { UserRole } = response.data; // Extract the user's role
+          console.log("User role: ", UserRole);
+          return { user: response.data, UserRole }; // Return the user object and role
         } catch (error) {
           console.error('Failed to fetch user:', error);
           return null; // Return null if user fetching fails
         }
-        
       };
-      
 
-      // Call the fetchUser function and return the user object
+      // Call the fetchUser function and return the user object with role
       return fetchUser();
     }
 
@@ -61,4 +59,4 @@ export const useAuth = () => {
   };
 
   return { login, isAuthenticated, logout };
-}; 
+};
