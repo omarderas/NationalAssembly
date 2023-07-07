@@ -149,7 +149,7 @@
                     }
                 }
                 .header-title{
-                    height: 311px;
+                    height: 60px;
                     h1{
                         font-family: "Cinzel", serif;
                         color: #fff;
@@ -157,31 +157,27 @@
                         padding-top: 10px;
                         padding-bottom: 10px;
                     }
-                    ul.docs {
-                        list-style: square inside url("../../images/pdf-icon.png");
-                     a{
-                        &:hover{
-                            text-decoration: none;
-                        }
-                        li{
-                            font-family: Poppins;
-                       
-                            padding-top: 0px;
-                            line-height: 2;
-                            letter-spacing: 0.02em;
-                            font-size: 15px;
-                            text-align: left;
-                            font-weight: 500;
-                            opacity: 0.9;
-                            color: #fff;
-                            transition: .5s;
-                            &:hover{
-                                color: #fcd93d;
-                                opacity: 1;
-                            }
-                        }
-                     }
+
+                }
+                .desc {
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    height: 229px;
+                    p{
+                        font-family: Poppins;
+                   
+                        padding-top: 0px;
+                        line-height: 2;
+                        letter-spacing: 0.02em;
+                        font-size: 15px;
+                        text-align: center;
+                        font-weight: 500;
+                        opacity: 0.9;
+                        color: #fff;
+                        transition: .5s;
+                     
                     }
+                 
                 }
                 .view-more{
                    // margin-bottom: 113px;

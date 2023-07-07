@@ -39,10 +39,11 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `https://dazzling-love-27c27bfaa6.strapiapp.com`,
+        //apiURL: `https://dazzling-love-27c27bfaa6.strapiapp.com`,
+        apiURL: `http://127.0.0.1:1338`,
         queryLimit: 1000,
         collectionTypes: ['act'],
-        singleTypes: ['message','document'],
+        singleTypes: ['message'],
         },
     },
   ],

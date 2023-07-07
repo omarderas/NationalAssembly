@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
-const API_URL = 'https://dazzling-love-27c27bfaa6.strapiapp.com/api';
+const API_URL = 'http://localhost:1338/api';
 
 export const useAuth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
